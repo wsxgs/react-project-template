@@ -1,6 +1,22 @@
 /**
+ * 生成显示隐藏ACTION
+ * @param {*} status
+ */
+export function showLoadingAction() {
+  return {
+    type: 'SHOW-lOADING-ACTION'
+  };
+}
+
+export function hideLoadingAction() {
+  return {
+    type: 'HIDE-lOADING-ACTION'
+  };
+}
+
+/**
  * 生成添加任务ACTION
- * @param {*} payload
+ * @param {*} text
  */
 export function addTaskAction(text) {
   return {
@@ -11,7 +27,7 @@ export function addTaskAction(text) {
 
 /**
  * 生成完成任务ACTION
- * @param {*} payload
+ * @param {*} id
  */
 export function finishTaskAction(id) {
   return {
@@ -22,7 +38,7 @@ export function finishTaskAction(id) {
 
 /**
  * 生成删除任务ACTION
- * @param {*} payload
+ * @param {*} id
  */
 export function deleteTaskAction(id) {
   return {

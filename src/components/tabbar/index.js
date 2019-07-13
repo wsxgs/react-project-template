@@ -3,22 +3,62 @@ import { Link } from 'react-router-dom';
 
 import './index.sass';
 
-export default class cs extends Component {
+export default class Tabbar extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      // 选中项项卡index
+      activeIndex: 0
+    };
+    this.navList = [
+      {
+        name: '首页',
+        href: '/'
+      },
+      {
+        name: 'todoList',
+        href: '/todo'
+      }
+    ];
+  }
+
+  componentWillMount() {
+    let path = window.location.pathname;
+    let index = this.navList.findIndex(item => item.href === path);
+    this.setState({
+      activeIndex: index
+    });
+  }
+
+  /**
+   * 切换选项卡
+   * @param {Number} index
+   */
+  toggleNav(index) {
+    if (index === this.state.activeIndex) {
+      return;
+    }
+    this.setState({
+      activeIndex: index
+    });
   }
 
   render() {
+    let { activeIndex } = this.state;
     return (
       <div className="tabbar">
         <ul>
-          <li>
-            <Link to="/">首页</Link>
-          </li>
-          <li>
-            <Link to="/todo">选项1</Link>
-          </li>
+          {this.navList.map((item, index) => {
+            return (
+              <li
+                key={index}
+                className={index === activeIndex ? 'active' : ''}
+                onClick={this.toggleNav.bind(this, index)}
+              >
+                <Link to={item.href}>{item.name}</Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );

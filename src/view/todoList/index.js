@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import {
   addTaskAction,
   deleteTaskAction,
-  finishTaskAction
+  finishTaskAction,
+  hideLoadingAction
 } from '../../redux/action';
-import './todoList.sass';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import './index.sass';
 
 class TodoList extends Component {
   constructor(props) {
@@ -13,7 +15,11 @@ class TodoList extends Component {
     this.state = {};
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.hideLoadingAction();
+    }, 500);
+  }
 
   /**
    * 添加任务
@@ -21,6 +27,10 @@ class TodoList extends Component {
   addTask() {
     let input = this.refs.taskInput;
     let value = input.value;
+    if (value === '') {
+      alert('请输入任务');
+      return;
+    }
 
     this.props.addTaskAction(value);
     input.value = '';
@@ -41,47 +51,52 @@ class TodoList extends Component {
     return (
       <div className="todo container">
         <div className="add-task">
-          <input type="text" ref="taskInput" />
+          <input type="text" ref="taskInput" placeholder="请输入任务" />
           <button onClick={this.addTask.bind(this)}>添加</button>
         </div>
         <div className="task-list">
           <h3 className="title">我的任务</h3>
           <ul>
-            {todoList &&
-              todoList.map((item, index) => {
-                return (
-                  <li
-                    key={item.id}
-                    className={item.status === 1 ? 'finished' : ''}
-                  >
-                    <div className="content">
-                      <span>{index + 1}.</span>
-                      {item.text}
-                    </div>
-                    <div className="action">
-                      {item.status !== 1 && (
-                        <span
-                          className="success"
-                          onClick={() => {
-                            this.finishTask(item.id);
-                          }}
-                        >
-                          完成
-                        </span>
-                      )}
+            <TransitionGroup>
+              {todoList &&
+                todoList.map((item, index) => {
+                  return (
+                    <CSSTransition
+                      key={item.id}
+                      className={item.status === 1 ? 'finished' : ''}
+                      timeout={500}
+                    >
+                      <li>
+                        <div className="content">
+                          <span>{index + 1}.</span>
+                          {item.text}
+                        </div>
+                        <div className="action">
+                          {item.status !== 1 && (
+                            <span
+                              className="success"
+                              onClick={() => {
+                                this.finishTask(item.id);
+                              }}
+                            >
+                              完成
+                            </span>
+                          )}
 
-                      <span
-                        className="delete"
-                        onClick={() => {
-                          this.deleteTask(item.id);
-                        }}
-                      >
-                        删除
-                      </span>
-                    </div>
-                  </li>
-                );
-              })}
+                          <span
+                            className="delete"
+                            onClick={() => {
+                              this.deleteTask(item.id);
+                            }}
+                          >
+                            删除
+                          </span>
+                        </div>
+                      </li>
+                    </CSSTransition>
+                  );
+                })}
+            </TransitionGroup>
           </ul>
 
           {todoList.length === 0 && (
@@ -109,6 +124,9 @@ function mapDispatchToProps(dispatch) {
     },
     finishTaskAction: params => {
       dispatch(finishTaskAction(params));
+    },
+    hideLoadingAction: () => {
+      dispatch(hideLoadingAction());
     }
   };
 }
