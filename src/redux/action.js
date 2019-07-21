@@ -2,15 +2,10 @@
  * 生成显示隐藏ACTION
  * @param {*} status
  */
-export function showLoadingAction() {
+export function toggleLoadingAction(status) {
   return {
-    type: 'SHOW-lOADING-ACTION'
-  };
-}
-
-export function hideLoadingAction() {
-  return {
-    type: 'HIDE-lOADING-ACTION'
+    type: 'TOGGLE-lOADING-ACTION',
+    status: status
   };
 }
 

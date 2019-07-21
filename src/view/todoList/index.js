@@ -4,7 +4,7 @@ import {
   addTaskAction,
   deleteTaskAction,
   finishTaskAction,
-  hideLoadingAction
+  toggleLoadingAction
 } from '../../redux/action';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './index.sass';
@@ -17,7 +17,7 @@ class TodoList extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.hideLoadingAction();
+      this.props.toggleLoadingAction(false);
     }, 500);
   }
 
@@ -110,7 +110,7 @@ class TodoList extends Component {
 
 function mapStateToProps(state) {
   return {
-    todoList: state.taskReducer
+    todoList: state.taskState
   };
 }
 
@@ -125,8 +125,8 @@ function mapDispatchToProps(dispatch) {
     finishTaskAction: params => {
       dispatch(finishTaskAction(params));
     },
-    hideLoadingAction: () => {
-      dispatch(hideLoadingAction());
+    toggleLoadingAction: status => {
+      dispatch(toggleLoadingAction(status));
     }
   };
 }

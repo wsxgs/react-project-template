@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { routes } from './routers';
-import { showLoadingAction } from './redux/action';
+import { toggleLoadingAction } from './redux/action';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Tabbar from './components/tabbar';
 import Loading from './components/loading';
@@ -18,7 +18,7 @@ class App extends Component {
     let nextPathname = nextProps.location.pathname;
 
     if (pathname !== nextPathname) {
-      this.props.showLoadingAction();
+      this.props.toggleLoadingAction(true);
     }
   }
 
@@ -54,14 +54,14 @@ let newApp = withRouter(App);
 
 function mapStateToProps(state) {
   return {
-    isShowLoading: state.loadingReducer
+    isShowLoading: state.loadingState
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    showLoadingAction: () => {
-      dispatch(showLoadingAction());
+    toggleLoadingAction: status => {
+      dispatch(toggleLoadingAction(status));
     }
   };
 }

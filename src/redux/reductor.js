@@ -1,6 +1,11 @@
 import { setStore, getStore } from './../tools/store';
 
-export function taskReducer(state = getStore('TO-DO-LIST') || [], action) {
+/**
+ * rodoList
+ * @param {*} state
+ * @param {*} action
+ */
+export function taskState(state = getStore('TO-DO-LIST') || [], action) {
   let newState = [];
   switch (action.type) {
     // 添加任务
@@ -40,14 +45,15 @@ export function taskReducer(state = getStore('TO-DO-LIST') || [], action) {
   }
 }
 
-export function loadingReducer(state = false, action) {
+/**
+ * 加载中
+ * @param {*} state
+ * @param {*} action
+ */
+export function loadingState(state = false, action) {
   switch (action.type) {
-    case 'SHOW-lOADING-ACTION':
-      return true;
-
-    case 'HIDE-lOADING-ACTION':
-      return false;
-
+    case 'TOGGLE-lOADING-ACTION':
+      return action.status;
     default:
       return true;
   }

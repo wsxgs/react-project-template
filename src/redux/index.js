@@ -1,5 +1,5 @@
 import { combineReducers, createStore } from 'redux';
-import { taskReducer, loadingReducer } from './reductor';
+import { taskState, loadingState } from './reductor';
 
-let reductor = combineReducers({ taskReducer, loadingReducer });
+let reductor = combineReducers({ taskState, loadingState });
 export let store = createStore(reductor);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hideLoadingAction } from '../../redux/action';
+import { toggleLoadingAction } from '../../redux/action';
 import './index.sass';
 const Logo = './logo.svg';
 class Home extends Component {
@@ -11,7 +11,7 @@ class Home extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.hideLoadingAction();
+      this.props.toggleLoadingAction(false);
     }, 500);
   }
 
@@ -31,8 +31,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    hideLoadingAction: params => {
-      dispatch(hideLoadingAction(params));
+    toggleLoadingAction: status => {
+      dispatch(toggleLoadingAction(status));
     }
   };
 }
