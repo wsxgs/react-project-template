@@ -1,6 +1,6 @@
+import Loadable from 'react-loadable';
 import Home from './view/home';
-import Todo from './view/todoList';
-// import NotFound from './view/NotFound';
+import Loading from './components/loading';
 
 export let routes = [
   {
@@ -9,6 +9,9 @@ export let routes = [
   },
   {
     path: '/todo',
-    component: Todo
+    component: Loadable({
+      loader: () => import('./view/todoList'),
+      loading: Loading
+    })
   }
 ];
