@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleLoadingAction } from '../../redux/action';
+import request from './../../tools/request';
 import './index.sass';
 const Logo = './logo.svg';
 class Home extends Component {
@@ -10,9 +11,16 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    // 测试ajax
+    this.sendRequest();
     setTimeout(() => {
       this.props.toggleLoadingAction(false);
     }, 500);
+  }
+
+  async sendRequest() {
+    let res = await request.post('/api', { id: 'ceshi ' });
+    console.log(res);
   }
 
   render() {
