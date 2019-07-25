@@ -76,13 +76,12 @@ function handleOptions(opts) {
   }
 
   let arr = Object.keys(opts);
-  let newArr = arr.map((item, index) => {
+  let newArr = [];
+  arr.forEach((item, index) => {
+    let newItem = null;
     if (opts[item]) {
-      item = `${item}=${opts[item]}`;
-    } else {
-      item = '';
+      newArr.push(`${item}=${opts[item]}`);
     }
-    return item;
   });
   let newOpts = newArr.join('&');
   return newOpts ? '?' + newOpts : '';
