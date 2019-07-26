@@ -78,7 +78,6 @@ function handleOptions(opts) {
   let arr = Object.keys(opts);
   let newArr = [];
   arr.forEach((item, index) => {
-    let newItem = null;
     if (opts[item]) {
       newArr.push(`${item}=${opts[item]}`);
     }
