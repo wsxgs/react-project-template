@@ -34,7 +34,9 @@ class App extends Component {
           classNames="fades"
           timeout={300}
         >
-          <div>{this.props.isShowLoading && <Loading />}</div>
+          <div className="loading-wrap">
+            {this.props.isShowLoading && <Loading />}
+          </div>
         </CSSTransition>
         <TransitionGroup>
           <CSSTransition key={location.key} classNames="fades" timeout={300}>

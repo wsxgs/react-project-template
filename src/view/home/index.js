@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleLoadingAction } from '../../redux/action';
-import request from './../../tools/request';
+// import request from './../../tools/request';
 import './index.sass';
 const Logo = './logo.svg';
 class Home extends Component {
@@ -19,8 +19,7 @@ class Home extends Component {
   }
 
   async sendRequest() {
-    let res = await request.post('/api', { id: 'ceshi ' });
-    console.log(res);
+    // let res = await request.post('/api', { id: 'ceshi ' });
   }
 
   render() {
