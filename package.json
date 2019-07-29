@@ -73,7 +73,8 @@
 	"scripts": {
 		"start": "react-app-rewired start",
 		"build": "react-app-rewired build",
-		"test": "react-app-rewired test"
+		"test": "react-app-rewired test",
+		"eslint": "eslint --ext .js --cache --fix src/"
 	},
 	"eslintConfig": {
 		"extends": "react-app",
@@ -155,7 +156,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS && npm run eslint"
 		}
 	}
 }
