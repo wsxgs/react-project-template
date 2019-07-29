@@ -28,13 +28,11 @@ let request = {
           if (res.data.code === 200) {
             resolve(res.data);
           } else {
-            reject(res.data);
             Toast.fail(res.msg, 3, () => {});
           }
         })
         .catch(e => {
           console.log(e);
-          reject(e);
           alert('系统提示', '网络错误，请稍候再试', [
             { text: '确定', onPress: () => {} }
           ]);
@@ -55,7 +53,6 @@ let request = {
           if (res.data.code === 200) {
             resolve(res.data);
           } else {
-            reject(res.data);
             Toast.fail(res.msg, 3, () => {});
           }
         })
