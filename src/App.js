@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import { routes } from './routers'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Tabbar from './components/tabbar'
@@ -45,6 +45,7 @@ class App extends Component {
               {routes.map((route, i) => (
                 <Route key={i} {...route} exact />
               ))}
+              <Redirect to="/404" />
             </Switch>
           </CSSTransition>
         </TransitionGroup>
