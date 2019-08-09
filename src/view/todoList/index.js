@@ -1,53 +1,49 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  addTaskAction,
-  deleteTaskAction,
-  finishTaskAction,
-  toggleLoadingAction
-} from '../../redux/action';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import './index.sass';
+import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import './index.sass'
 
+@inject('loadingStore', 'taskStore')
+@observer
 class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  constructor (props) {
+    super(props)
+    this.state = {}
   }
 
-  componentDidMount() {
+  componentDidMount () {
     setTimeout(() => {
-      this.props.toggleLoadingAction(false);
-    }, 500);
+      this.props.loadingStore.toggleLoadingStatus(false)
+    }, 500)
   }
 
   /**
    * 添加任务
    */
-  addTask() {
-    let input = this.refs.taskInput;
-    let value = input.value;
+  addTask () {
+    const input = this.refs.taskInput
+    const value = input.value
     if (value === '') {
-      alert('请输入任务');
-      return;
+      alert('请输入任务')
+      return
     }
 
-    this.props.addTaskAction(value);
-    input.value = '';
+    this.props.taskStore.addTask(value)
+    input.value = ''
   }
 
-  finishTask(id) {
-    console.log('完成');
-    this.props.finishTaskAction(id);
+  finishTask (id) {
+    console.log('完成')
+    this.props.taskStore.finishTask(id)
   }
 
-  deleteTask(id) {
-    console.log('删除');
-    this.props.deleteTaskAction(id);
+  deleteTask (id) {
+    console.log('删除')
+    this.props.taskStore.deleteTask(id)
   }
 
-  render() {
-    let { todoList } = this.props;
+  render () {
+    const { taskList } = this.props.taskStore
     return (
       <div className="todo container">
         <div className="add-task">
@@ -58,8 +54,8 @@ class TodoList extends Component {
           <h3 className="title">我的任务</h3>
           <ul>
             <TransitionGroup>
-              {todoList &&
-                todoList.map((item, index) => {
+              {taskList &&
+                taskList.map((item, index) => {
                   return (
                     <CSSTransition
                       key={item.id}
@@ -76,7 +72,7 @@ class TodoList extends Component {
                             <span
                               className="success"
                               onClick={() => {
-                                this.finishTask(item.id);
+                                this.finishTask(item.id)
                               }}
                             >
                               完成
@@ -86,7 +82,7 @@ class TodoList extends Component {
                           <span
                             className="delete"
                             onClick={() => {
-                              this.deleteTask(item.id);
+                              this.deleteTask(item.id)
                             }}
                           >
                             删除
@@ -94,44 +90,18 @@ class TodoList extends Component {
                         </div>
                       </li>
                     </CSSTransition>
-                  );
+                  )
                 })}
             </TransitionGroup>
           </ul>
 
-          {todoList.length === 0 && (
+          {taskList.length === 0 && (
             <div className="tips">还没有添加任务，快来添加吧~</div>
           )}
         </div>
       </div>
-    );
+    )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    todoList: state.taskState
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    addTaskAction: params => {
-      dispatch(addTaskAction(params));
-    },
-    deleteTaskAction: params => {
-      dispatch(deleteTaskAction(params));
-    },
-    finishTaskAction: params => {
-      dispatch(finishTaskAction(params));
-    },
-    toggleLoadingAction: status => {
-      dispatch(toggleLoadingAction(status));
-    }
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoList);
+export default TodoList

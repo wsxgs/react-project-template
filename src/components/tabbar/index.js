@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
-import './index.sass';
+import './index.sass'
 
 export default class Tabbar extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
     this.state = {
       // 选中项项卡index
       activeIndex: 0
-    };
+    }
     this.navList = [
       {
         name: '首页',
@@ -19,32 +19,32 @@ export default class Tabbar extends Component {
         name: 'todoList',
         href: '/todo'
       }
-    ];
+    ]
   }
 
-  componentWillMount() {
-    let path = window.location.pathname;
-    let index = this.navList.findIndex(item => item.href === path);
+  componentWillMount () {
+    const path = window.location.pathname
+    const index = this.navList.findIndex(item => item.href === path)
     this.setState({
       activeIndex: index
-    });
+    })
   }
 
   /**
    * 切换选项卡
    * @param {Number} index
    */
-  toggleNav(index) {
+  toggleNav (index) {
     if (index === this.state.activeIndex) {
-      return;
+      return
     }
     this.setState({
       activeIndex: index
-    });
+    })
   }
 
-  render() {
-    let { activeIndex } = this.state;
+  render () {
+    const { activeIndex } = this.state
     return (
       <div className="tabbar">
         <ul>
@@ -57,10 +57,10 @@ export default class Tabbar extends Component {
               >
                 <Link to={item.href}>{item.name}</Link>
               </li>
-            );
+            )
           })}
         </ul>
       </div>
-    );
+    )
   }
 }

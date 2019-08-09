@@ -1,50 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { toggleLoadingAction } from '../../redux/action';
+import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 // import request from './../../tools/request';
-import './index.sass';
-const Logo = './logo.svg';
+import './index.sass'
+const Logo = './logo.svg'
+
+@inject('loadingStore')
+@observer
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor () {
+    super()
+    this.state = {}
   }
 
-  componentDidMount() {
+  componentDidMount () {
+    console.log(this.props)
     // 测试ajax
-    this.sendRequest();
+    this.sendRequest()
     setTimeout(() => {
-      this.props.toggleLoadingAction(false);
-    }, 500);
+      this.props.loadingStore.toggleLoadingStatus(false)
+    }, 500)
   }
 
-  async sendRequest() {
+  async sendRequest () {
     // let res = await request.post('/api', { id: 'ceshi ' });
   }
 
-  render() {
+  render () {
     return (
       <div className="home">
         <img className="App-logo" src={Logo} alt="" />
         <h3 className="App-link">React.js</h3>
       </div>
-    );
+    )
   }
 }
 
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    toggleLoadingAction: status => {
-      dispatch(toggleLoadingAction(status));
-    }
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default Home

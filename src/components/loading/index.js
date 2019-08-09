@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import './index.sass';
+import React, { Component } from 'react'
+import './index.sass'
 
 class Loading extends Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor () {
+    super()
+    this.state = {}
   }
 
-  render() {
+  render () {
     return (
       <div className="loading">
         <span className="line" />
@@ -16,8 +16,8 @@ class Loading extends Component {
         <span className="line" />
         <span className="line" />
       </div>
-    );
+    )
   }
 }
 
-export default Loading;
+export default Loading
