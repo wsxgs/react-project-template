@@ -1,8 +1,9 @@
 const {
   override,
   fixBabelImports,
-  addPostcssPlugins
-} = require('customize-cra');
+  addPostcssPlugins,
+  addDecoratorsLegacy
+} = require('customize-cra')
 
 module.exports = override(
   fixBabelImports('import', {
@@ -20,5 +21,6 @@ module.exports = override(
       minPixelValue: 1, // (Number) Set the minimum pixel value to replace.
       mediaQuery: false // (Boolean) Allow px to be converted in media queries. },
     })
-  ])
-);
+  ]),
+  addDecoratorsLegacy()
+)
