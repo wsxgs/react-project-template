@@ -20,13 +20,13 @@
 				color: #666;
 				font-size: 32px;
 				transition: 0.3s;
+			}
 
-				&.active {
+			&.active {
+				color: #61dafb;
+
+				a {
 					color: #61dafb;
-
-					a {
-						color: #61dafb;
-					}
 				}
 			}
 		}
