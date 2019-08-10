@@ -45,7 +45,7 @@ class App extends Component {
               {routes.map((route, i) => (
                 <Route key={i} {...route} exact />
               ))}
-              <Redirect to="/404" />
+              <Redirect to="/" />
             </Switch>
           </CSSTransition>
         </TransitionGroup>

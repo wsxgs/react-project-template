@@ -13,12 +13,5 @@ export const routes = [
       loader: () => import('./view/todoList'),
       loading: Loading
     })
-  },
-  {
-    path: '/404',
-    component: Loadable({
-      loader: () => import('./view/404'),
-      loading: Loading
-    })
   }
 ]
