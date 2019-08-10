@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import './index.sass'
+import './index.scss'
 
 @inject('loadingStore', 'taskStore')
 @observer

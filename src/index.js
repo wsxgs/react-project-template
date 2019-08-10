@@ -6,7 +6,7 @@ import * as store from './mobx'
 import App from './App'
 
 import 'normalize.css'
-import './../src/style/global.sass'
+import './../src/style/global.scss'
 import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(

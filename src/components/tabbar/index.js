@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import './index.sass'
+import './index.scss'
 
 export default class Tabbar extends Component {
   constructor () {

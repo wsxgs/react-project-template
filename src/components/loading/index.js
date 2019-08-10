@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './index.sass'
+import './index.scss'
 
 class Loading extends Component {
   constructor () {

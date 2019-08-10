@@ -1,0 +1,82 @@
+* {
+	box-sizing: border-box
+}
+
+body {
+	margin: 0;
+	font-family: -apple-system BlinkMacSystemFont "Segoe UI""Roboto""Oxygen""Ubuntu""Cantarell""Fira Sans""Droid Sans""Helvetica Neue"sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #666;
+	background-color: #f6f6f6;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0
+}
+
+a {
+	text-decoration: none;
+	outline: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none
+}
+
+input {
+	border: none;
+	outline: none
+}
+
+::-webkit-input-placeholder {
+	color: #999
+}
+
+button {
+	border: none;
+	outline: none
+}
+
+.container {
+	width: 100%;
+	padding: 0 15px
+}
+
+.loading-wrap {
+	position: relative;
+	z-index: 999
+}
+
+.fades-enter {
+	opacity: 0;
+}
+
+.fades-enter-active {
+	opacity: 1;
+	transition: opacity 300ms ease-in;
+}
+
+.fades-exit {
+	opacity: 1;
+}
+
+.fades-exit-active {
+	opacity: 0;
+	transition: opacity 300ms ease-in;
+}
