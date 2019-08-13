@@ -4,6 +4,30 @@ const {
   addPostcssPlugins,
   addDecoratorsLegacy
 } = require('customize-cra')
+const WorkboxPlugin = require('workbox-webpack-plugin')
+
+const customPlugin = () => config => {
+  const plugins = [
+    new WorkboxPlugin.GenerateSW({
+      cacheId: 'webpack-pwa', // 设置前缀
+      skipWaiting: true, // 强制等待中的 Service Worker 被激活
+      clientsClaim: true, // Service Worker 被激活后使其立即获得页面控制权
+      runtimeCaching: [
+        // 配置路由请求缓存
+        {
+          urlPattern: /.*\.js/, // 匹配文件
+          handler: 'NetworkFirst' // 网络优先
+        },
+        {
+          urlPattern: /\/api/, // 匹配文件
+          handler: 'NetworkFirst' // 网络优先
+        }
+      ]
+    })
+  ]
+  config.plugins = [...config.plugins, ...plugins]
+  return config
+}
 
 module.exports = override(
   fixBabelImports('import', {
@@ -22,5 +46,6 @@ module.exports = override(
       mediaQuery: false // (Boolean) Allow px to be converted in media queries. },
     })
   ]),
-  addDecoratorsLegacy()
+  addDecoratorsLegacy(),
+  customPlugin()
 )
