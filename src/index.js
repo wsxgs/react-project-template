@@ -9,6 +9,14 @@ import 'normalize.css'
 import './../src/style/global.scss'
 import * as serviceWorker from './serviceWorker'
 
+// vconsole
+import vconsole from 'vconsole'
+import { checkIsMobile } from './tools/validate'
+const env = process.env.NODE_ENV
+if (checkIsMobile() && env === 'development') {
+  window.vconsole = new vconsole()
+}
+
 ReactDOM.render(
   <Provider {...store}>
     <Router>

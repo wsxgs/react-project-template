@@ -25,7 +25,6 @@ export default class Tabbar extends Component {
   componentWillMount () {
     const path = window.location.pathname
     const index = this.navList.findIndex(item => item.href === path)
-    console.log(index)
     this.setState({
       activeIndex: index === -1 ? 0 : index
     })
