@@ -1,7 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
 import { Toast, Modal } from 'antd-mobile'
-
 const alert = Modal.alert
 
 const baseURL = '/'
