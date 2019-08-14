@@ -15,8 +15,8 @@ import './../src/style/global.scss'
 import Vconsole from 'vconsole'
 import { checkIsMobile } from './tools/validate'
 
-const env = process.env.NODE_ENV
-if (checkIsMobile() && env === 'development') {
+const env = process.env.REACT_APP_ENV
+if (checkIsMobile() && env !== 'prod') {
   window.vconsole = new Vconsole()
 }
 

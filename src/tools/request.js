@@ -4,12 +4,17 @@ import { Toast, Modal } from 'antd-mobile'
 
 const alert = Modal.alert
 
-let baseURL = ''
-if (process.env.NODE_ENV === 'development') {
-  baseURL = '/'
-} else {
-  baseURL = '/'
-}
+const baseURL = '/'
+const APP_ENV = process.env.REACT_APP_ENV
+console.log(APP_ENV)
+// 根据环境配置不同路径
+// if (APP_ENV === 'dev') {
+//   baseURL = '/'
+// } else if (APP_ENV === 'test') {
+//   baseURL = '/'
+// } else {
+//   baseURL = '/'
+// }
 
 // 使用由库提供的配置的默认值来创建实例
 var instance = axios.create({
