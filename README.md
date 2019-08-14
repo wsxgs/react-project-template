@@ -10,7 +10,8 @@ yarn run start
 
 ## 打包
 
-yarn run build
+测试: yarn run testing
+生产: yarn run build
 
 ## 相关文档
 
