@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
-import { routes } from './routers'
+import { routes } from './router'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Tabbar from './components/tabbar'
 import Loading from './components/loading'

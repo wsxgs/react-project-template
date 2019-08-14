@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import request from './../../tools/request'
+// import request from './../../tools/request'
 import './index.scss'
 const Logo = './logo.svg'
 
@@ -13,7 +13,6 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props)
     // 测试ajax
     this.sendRequest()
     setTimeout(() => {
@@ -22,7 +21,7 @@ class Home extends Component {
   }
 
   async sendRequest () {
-    await request.post('/api', { id: 'ceshi' })
+    // await request.post('/api', { id: 'ceshi' })
   }
 
   render () {
