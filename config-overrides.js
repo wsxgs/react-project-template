@@ -6,6 +6,7 @@ const {
 } = require('customize-cra')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 
+// 添加自定义插件方法
 const customPlugin = () => config => {
   const plugins = [
     new WorkboxPlugin.GenerateSW({
