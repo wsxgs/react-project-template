@@ -1,3 +1,6 @@
+/**
+ * 判断 ios/ android
+ */
 export function checkClient () {
   var u = navigator.userAgent
   var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 // android终端
@@ -9,6 +12,9 @@ export function checkClient () {
   }
 }
 
+/**
+ * 判断是否为移动端
+ */
 export function checkIsMobile () {
   var platform = navigator.platform
   if (platform !== 'MacIntel' && platform !== 'win32' && platform !== 'win64') {
