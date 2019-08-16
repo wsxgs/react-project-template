@@ -2,7 +2,7 @@ import { observable, action } from 'mobx'
 import { setStore, getStore } from './../tools/store'
 
 class LoadingStore {
-  @observable isShowLoading = true
+  @observable isShowLoading = true;
 
   @action.bound
   toggleLoadingStatus (state) {
@@ -13,7 +13,7 @@ class LoadingStore {
 export const loadingStore = new LoadingStore()
 
 class TaskStore {
-  @observable taskList = getStore('TO-DO-LIST') || []
+  @observable taskList = getStore('TO-DO-LIST') || [];
 
   @action.bound
   addTask (text) {
