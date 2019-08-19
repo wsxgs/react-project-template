@@ -18,6 +18,7 @@ module.exports = {
   },
   plugins: ['react', 'flowtype', 'jsx-a11y'],
   rules: {
-    semi: 2
+    semi: 2,
+    camelcase: 0
   }
 }
