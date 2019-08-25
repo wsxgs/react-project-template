@@ -1,5 +1,6 @@
 import axios from 'axios'
-import qs from 'qs'
+import { LoadingStore } from './../mobx'
+// import qs from 'qs'
 import { Toast, Modal } from 'antd-mobile'
 const alert = Modal.alert
 
@@ -16,75 +17,65 @@ console.log(APP_ENV)
 // }
 
 // 使用由库提供的配置的默认值来创建实例
-var instance = axios.create({
-  baseURL: baseURL,
-  timeout: 10000
-})
+var request = axios.create()
+request.defaults.baseURL = baseURL
+request.defaults.timeout = 10000
+// 设置请求头
+// request.defaults.headers.token = 'AUTH_TOKEN'
+// request.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
-const request = {
-  get (url, opts = {}) {
-    return new Promise((resolve, reject) => {
-      instance({
-        method: 'GET',
-        url: url + handleOptions(opts)
-      })
-        .then(res => {
-          if (res.data.code === 200) {
-            resolve(res.data)
-          } else {
-            Toast.fail(res.msg, 3, () => {})
-          }
-        })
-        .catch(e => {
-          console.log(e)
-          alert('系统提示', '网络错误，请稍候再试', [
-            { text: '确定', onPress: () => {} }
-          ])
-        })
-    })
+// 添加请求拦截器
+request.interceptors.request.use(
+  function (config) {
+    // stringify请求参数
+    // if (config.methods === 'post') {
+    //   config.data = qs.stringify(config.data)
+    // }
+    // 在发送请求之前做些什么
+    return config
   },
-  post (url, opts = {}) {
-    return new Promise((resolve, reject) => {
-      instance({
-        method: 'POST',
-        url: url,
-        data: qs.stringify(opts),
-        headers: {
-          contentType: 'application/x-www-form-urlencoded'
-        }
-      })
-        .then(res => {
-          if (res.data.code === 200) {
-            resolve(res.data)
-          } else {
-            Toast.fail(res.msg, 3, () => {})
-          }
-        })
-        .catch(e => {
-          console.log(e)
-          reject(e)
-          alert('系统提示', '网络错误，请稍候再试', [
-            { text: '确定', onPress: () => {} }
-          ])
-        })
-    })
+  function (error) {
+    // 对请求错误做些什么
+    return Promise.reject(error)
   }
-}
+)
 
-function handleOptions (opts) {
-  if (typeof opts !== 'object') {
-    return ''
-  }
-
-  const arr = Object.keys(opts)
-  const newArr = []
-  arr.forEach((item, index) => {
-    if (opts[item]) {
-      newArr.push(`${item}=${opts[item]}`)
+// 添加响应拦截器
+request.interceptors.response.use(
+  function (response) {
+    // 对响应数据做点什么
+    if (response.data.code === 200) {
+    } else if (response.data.code === 401) {
+      // 去登录
+    } else {
+      // 关闭加载中
+      LoadingStore.toggleLoadingStatus(false)
+      Toast.fail(response.message, 1.5, () => {})
     }
-  })
-  const newOpts = newArr.join('&')
-  return newOpts ? '?' + newOpts : ''
-}
+    return response.data
+  },
+  function (error) {
+    // 关闭加载中
+    LoadingStore.toggleLoadingStatus(false)
+    // 对响应错误做点什么
+    let msg = ''
+    if (error.response) {
+      if (error.response.status === '500') {
+        msg = '系统错误'
+      } else if (error.response.statusText.indexOf('timeout') !== -1) {
+        msg = '请求超时'
+      } else {
+        msg = '网络错误'
+      }
+    } else {
+      msg = '网络错误'
+    }
+
+    alert('系统提示', `${msg}，请稍候再试`, [
+      { text: '确定', onPress: () => {} }
+    ])
+    return Promise.reject(error)
+  }
+)
 
 export default request
