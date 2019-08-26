@@ -20,15 +20,16 @@ console.log(APP_ENV)
 var request = axios.create()
 request.defaults.baseURL = baseURL
 request.defaults.timeout = 10000
-// 设置请求头
-// request.defaults.headers.token = 'AUTH_TOKEN'
+
 // request.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
 // 添加请求拦截器
 request.interceptors.request.use(
   function (config) {
+    // 设置请求头
+    // config.headers['token] = 'AUTH_TOKEN'
     // stringify请求参数
-    // if (config.methods === 'post') {
+    // if (config.method === 'post') {
     //   config.data = qs.stringify(config.data)
     // }
     // 在发送请求之前做些什么
