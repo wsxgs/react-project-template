@@ -8,9 +8,8 @@ const {
 } = require('customize-cra')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 
-// 添加自定义插件方法
-const customPlugin = () => config => {
-  const plugins = [
+const addWorkBoxPlugin = () => config => {
+  config.plugins.push(
     new WorkboxPlugin.GenerateSW({
       cacheId: 'webpack-pwa', // 设置前缀
       skipWaiting: true, // 强制等待中的 Service Worker 被激活
@@ -27,8 +26,13 @@ const customPlugin = () => config => {
         }
       ]
     })
-  ]
-  config.plugins = [...config.plugins, ...plugins]
+  )
+  return config
+}
+
+// 移除线上环境sourcemap
+const removeDevTool = () => config => {
+  config.devtool = 'none'
   return config
 }
 
@@ -52,7 +56,8 @@ module.exports = {
     ]),
     addDecoratorsLegacy(),
     useEslintRc(),
-    customPlugin()
+    addWorkBoxPlugin(),
+    removeDevTool()
   ),
   devServer: overrideDevServer(config => {
     config.proxy = {
