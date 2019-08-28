@@ -34,10 +34,9 @@ class App extends Component {
           in={loadingStore.isShowLoading}
           classNames="fades"
           timeout={300}
+          unmountOnExit
         >
-          <div className="loading-wrap">
-            {loadingStore.isShowLoading && <Loading />}
-          </div>
+          <Loading />
         </CSSTransition>
         <TransitionGroup>
           <CSSTransition key={location.key} classNames="fades" timeout={300}>
