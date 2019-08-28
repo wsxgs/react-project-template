@@ -3,7 +3,6 @@ const {
   overrideDevServer,
   fixBabelImports,
   addPostcssPlugins,
-  addDecoratorsLegacy,
   useBabelRc,
   useEslintRc,
   addWebpackPlugin
@@ -34,7 +33,6 @@ module.exports = {
         mediaQuery: false // (Boolean) Allow px to be converted in media queries. },
       })
     ]),
-    addDecoratorsLegacy(),
     useBabelRc(),
     useEslintRc(),
     addWebpackPlugin(
