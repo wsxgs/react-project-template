@@ -22,7 +22,7 @@ export default class Tabbar extends Component {
     ]
   }
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     const path = window.location.pathname
     const index = this.navList.findIndex(item => item.href === path)
     this.setState({

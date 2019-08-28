@@ -14,7 +14,7 @@ class App extends Component {
     this.state = {}
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     const { pathname } = this.props.location
     const nextPathname = nextProps.location.pathname
 
