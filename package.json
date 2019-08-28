@@ -61,11 +61,6 @@
 		"build": "cross-env REACT_APP_ENV=prod react-app-rewired build",
 		"eslint": "eslint --ext .js  --fix src/"
 	},
-	"babel": {
-		"presets": [
-			"react-app"
-		]
-	},
 	"browserslist": {
 		"production": [
 			">0.2%",

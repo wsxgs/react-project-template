@@ -42,7 +42,14 @@ class App extends Component {
           <CSSTransition key={location.key} classNames="fades" timeout={300}>
             <Switch location={location}>
               {routes.map((route, i) => (
-                <Route key={i} {...route} exact />
+                <Route
+                  key={i}
+                  exact
+                  path={route.path}
+                  render={props => {
+                    // pass the sub-routes down to keep nesting
+                    return <route.component {...props} />
+                  }}/>
               ))}
               <Redirect to="/" />
             </Switch>
