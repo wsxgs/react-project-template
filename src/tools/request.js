@@ -51,7 +51,7 @@ request.interceptors.response.use(
     } else {
       // 关闭加载中
       LoadingStore.toggleLoadingStatus(false)
-      Toast.fail(response.message, 1.5, () => {})
+      Toast.fail(response.data.message, 1.5, () => {})
     }
     return response.data
   },
