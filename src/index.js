@@ -4,20 +4,24 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'mobx-react'
 import * as store from './mobx'
 import App from './App'
+import { checkIsMobile } from './tools/validate'
 
 // service worker
 import './serviceWorker'
 
+// 样式重置
 import 'normalize.css'
 import './../src/style/global.scss'
 
 // vconsole
-import Vconsole from 'vconsole'
-import { checkIsMobile } from './tools/validate'
-
+function addVconsole () {
+  return import('vconsole').then(Vconsole => {
+    window.vconsole = new Vconsole()
+  })
+}
 const env = process.env.REACT_APP_ENV
 if (checkIsMobile() && env !== 'prod') {
-  window.vconsole = new Vconsole()
+  addVconsole()
 }
 
 ReactDOM.render(
