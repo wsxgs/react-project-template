@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.scss'
@@ -6,6 +7,11 @@ import './index.scss'
 @inject('loadingStore', 'taskStore')
 @observer
 class TodoList extends Component {
+  static propTypes = {
+    loadingStore: PropTypes.object,
+    taskStore: PropTypes.object
+  }
+
   constructor (props) {
     super(props)
     this.state = {}
@@ -20,7 +26,7 @@ class TodoList extends Component {
   /**
    * 添加任务
    */
-  addTask () {
+  addTask = () => {
     const input = this.refs.taskInput
     const value = input.value
     if (value === '') {
@@ -48,7 +54,7 @@ class TodoList extends Component {
       <div className="todo container">
         <div className="add-task">
           <input type="text" ref="taskInput" placeholder="请输入任务" />
-          <button onClick={this.addTask.bind(this)}>添加</button>
+          <button onClick={this.addTask}>添加</button>
         </div>
         <div className="task-list">
           <h3 className="title">我的任务</h3>

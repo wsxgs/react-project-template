@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
     es6: true
   },
-  extends: ['standard', 'react-app'],
+  extends: ['standard','plugin:react/recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
@@ -17,9 +17,12 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: ['react', 'flowtype', 'jsx-a11y'],
+  parser: "babel-eslint",
+  plugins: ['react', 'jsx-a11y', 'flowtype'],
   rules: {
     semi: 2,
-    camelcase: 0
+    camelcase: 0,
+    'react/no-string-refs' : 0,
+    'react/prop-types': 0
   }
 }

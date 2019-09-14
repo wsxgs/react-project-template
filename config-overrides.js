@@ -6,14 +6,14 @@ const {
   useBabelRc,
   useEslintRc,
   addWebpackPlugin
-} = require('customize-cra');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+} = require('customize-cra')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 // 移除线上环境sourcemap
 const removeDevTool = () => config => {
-  config.devtool = 'none';
-  return config;
-};
+  config.devtool = 'none'
+  return config
+}
 
 module.exports = {
   webpack: override(
@@ -64,7 +64,7 @@ module.exports = {
         //   '^/smcAdmin': '/smcAdmin'
         // }
       }
-    };
-    return config;
+    }
+    return config
   })
-};
+}

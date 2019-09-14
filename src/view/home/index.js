@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 // import request from './../../tools/request'
 import './index.scss'
@@ -7,6 +8,10 @@ const Logo = './logo.svg'
 @inject('loadingStore')
 @observer
 class Home extends Component {
+  static propTypes = {
+    loadingStore: PropTypes.object
+  }
+
   constructor () {
     super()
     this.state = {}
