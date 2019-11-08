@@ -11,7 +11,8 @@ const WorkboxPlugin = require('workbox-webpack-plugin')
 
 // 移除线上环境sourcemap
 const removeDevTool = () => config => {
-  config.devtool = 'none'
+  config.devtool =
+    config.mode === 'development' ? 'cheap-module-source-map' : false
   return config
 }
 
